@@ -1,4 +1,6 @@
-// Check if already logged in
+// login.js
+
+// Check if user is already logged in
 window.onload = function() {
   const username = localStorage.getItem('username');
   if (username) {
@@ -10,54 +12,62 @@ function login() {
   const username = document.getElementById('login-username').value.trim();
   const password = document.getElementById('login-password').value.trim();
 
+  if (!username || !password) {
+    alert('Please fill in both fields.');
+    return;
+  }
+
   fetch('/logins.json')
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
       if (data[username] && data[username] === password) {
         localStorage.setItem('username', username);
         showWelcome(username);
       } else {
-        alert('Invalid username or password.');
+        alert('Incorrect username or password.');
       }
     })
-    .catch(() => alert('Login system unavailable.'));
+    .catch(() => {
+      alert('Login system error.');
+    });
 }
 
 function signup() {
   const username = document.getElementById('signup-username').value.trim();
   const password = document.getElementById('signup-password').value.trim();
 
-  if (username === '' || password === '') {
-    alert('Please fill all fields.');
+  if (!username || !password) {
+    alert('Please fill in both fields.');
     return;
   }
 
   fetch('/register', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
   })
+  .then(res => res.json())
   .then(response => {
-    if (response.ok) {
+    if (response.success) {
       localStorage.setItem('username', username);
       showWelcome(username);
     } else {
-      alert('Username already taken.');
+      alert(response.message);
     }
   })
-  .catch(() => alert('Signup system unavailable.'));
-}
-
-function showWelcome(username) {
-  document.getElementById('auth-area').style.display = 'none';
-  document.getElementById('welcome-area').style.display = 'block';
-  document.getElementById('welcome-msg').innerText = `Welcome, ${username}!`;
+  .catch(() => {
+    alert('Signup system error.');
+  });
 }
 
 function logout() {
   localStorage.removeItem('username');
-  document.getElementById('auth-area').style.display = 'block';
-  document.getElementById('welcome-area').style.display = 'none';
+  document.getElementById('auth-section').style.display = 'block';
+  document.getElementById('welcome-section').style.display = 'none';
+}
+
+function showWelcome(username) {
+  document.getElementById('auth-section').style.display = 'none';
+  document.getElementById('welcome-msg').textContent = `Welcome, ${username}!`;
+  document.getElementById('welcome-section').style.display = 'block';
 }
