@@ -17,6 +17,7 @@
     footer { background: #111; text-align: center; padding: 15px; font-size: 14px; color: #666; }
     .fade-in { animation: fadeIn 2s ease-in; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .hidden { display: none; }
   </style>
 </head>
 <body class="fade-in">
@@ -35,13 +36,14 @@
     <input type="text" id="usernameInput" placeholder="Username">
     <input type="password" id="passwordInput" placeholder="Password">
     <button onclick="login()">Login</button>
+    <p id="loginError" class="hidden" style="color: red;">Invalid username or password. Please try again.</p>
     <p id="welcomeMessage" style="color: #8b5cf6; display: none;">Welcome back, <span id="displayUsername"></span>!</p>
   </main>
 
   <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
 
   <script>
-    // Load username from localStorage if available
+    // Load saved username from localStorage
     window.onload = function() {
       const savedUsername = localStorage.getItem('username');
       if (savedUsername) {
@@ -55,13 +57,16 @@
       const username = document.getElementById('usernameInput').value;
       const password = document.getElementById('passwordInput').value;
 
+      // Validate username and password
       if (username && password) {
-        // Here you can add more complex login logic (e.g., authentication)
+        // Simulate a successful login (In a real scenario, you would authenticate with a server)
         localStorage.setItem('username', username);  // Save username for later use
+        localStorage.setItem('bio', 'This is a sample bio'); // Simulate bio for testing
+        localStorage.setItem('profilePic', 'default-pfp.png'); // Simulate profile picture for testing
         alert('Login successful!');
         window.location.href = 'profile.html';  // Redirect to profile page after successful login
       } else {
-        alert('Please enter both username and password.');
+        document.getElementById('loginError').classList.remove('hidden');
       }
     }
   </script>
