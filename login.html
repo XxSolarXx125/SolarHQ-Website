@@ -32,12 +32,39 @@
 
   <main>
     <h1>Login to SolarHQ</h1>
-    <input type="text" placeholder="Username">
-    <input type="password" placeholder="Password">
-    <button>Login</button>
+    <input type="text" id="usernameInput" placeholder="Username">
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p id="welcomeMessage" style="color: #8b5cf6; display: none;">Welcome back, <span id="displayUsername"></span>!</p>
   </main>
 
   <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
+
+  <script>
+    // Load username from localStorage if available
+    window.onload = function() {
+      const savedUsername = localStorage.getItem('username');
+      if (savedUsername) {
+        document.getElementById('usernameInput').value = savedUsername;
+        document.getElementById('welcomeMessage').style.display = 'block';
+        document.getElementById('displayUsername').textContent = savedUsername;
+      }
+    };
+
+    function login() {
+      const username = document.getElementById('usernameInput').value;
+      const password = document.getElementById('passwordInput').value;
+
+      if (username && password) {
+        // Here you can add more complex login logic (e.g., authentication)
+        localStorage.setItem('username', username);  // Save username for later use
+        alert('Login successful!');
+        window.location.href = 'profile.html';  // Redirect to profile page after successful login
+      } else {
+        alert('Please enter both username and password.');
+      }
+    }
+  </script>
 
 </body>
 </html>
