@@ -14,7 +14,6 @@
     h2 { font-size: 36px; margin-bottom: 20px; }
     label { display: block; margin: 15px 0 5px; font-size: 18px; }
     input, textarea { padding: 10px; width: 300px; max-width: 90%; background: #1a1a1a; border: none; color: #fff; margin-bottom: 15px; border-radius: 5px; }
-    input:disabled, textarea:disabled { background: #333; }
     textarea { resize: none; height: 100px; }
     button { background-color: #8b5cf6; border: none; color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
     button:hover { background-color: #7a4ce0; }
@@ -40,12 +39,15 @@
     <img id="profilePic" class="profile-picture" src="default-pfp.png" alt="Profile Picture">
     <br>
     <label for="username">Username:</label>
-    <input type="text" id="username" disabled>
+    <input type="text" id="username">
 
     <label for="bio">Bio:</label>
-    <textarea id="bio" disabled></textarea>
+    <textarea id="bio"></textarea>
 
-    <button class="hidden">Save Profile</button>
+    <label for="profilePicInput">Profile Picture URL:</label>
+    <input type="text" id="profilePicInput" placeholder="Enter image URL">
+
+    <button onclick="saveProfile()">Save Profile</button>
   </main>
 
   <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
@@ -61,6 +63,21 @@
       if (bio) document.getElementById('bio').value = bio;
       if (profilePic) document.getElementById('profilePic').src = profilePic;
     };
+
+    // Save profile info to localStorage
+    function saveProfile() {
+      const username = document.getElementById('username').value;
+      const bio = document.getElementById('bio').value;
+      const profilePic = document.getElementById('profilePicInput').value;
+
+      // Save the data to localStorage
+      localStorage.setItem('username', username);
+      localStorage.setItem('bio', bio);
+      localStorage.setItem('profilePic', profilePic || 'default-pfp.png'); // Use a default picture if none provided
+
+      // Show success message
+      alert('Profile saved successfully!');
+    }
   </script>
 
 </body>
