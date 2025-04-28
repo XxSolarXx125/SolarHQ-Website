@@ -1,44 +1,41 @@
+// server.js
+
 const express = require('express');
 const fs = require('fs');
-const path = require('path');
 const app = express();
 const PORT = 3000;
 
-app.use(express.static('public'));
 app.use(express.json());
+app.use(express.static(__dirname)); // Serve static files (index.html, login.js, etc.)
 
-const loginsFilePath = path.join(__dirname, 'public', 'logins.json');
+const LOGINS_FILE = __dirname + '/logins.json';
 
-// Ensure logins.json exists
-if (!fs.existsSync(loginsFilePath)) {
-  fs.writeFileSync(loginsFilePath, '{}');
+// Create the logins file if it doesn't exist
+if (!fs.existsSync(LOGINS_FILE)) {
+  fs.writeFileSync(LOGINS_FILE, JSON.stringify({}, null, 2));
 }
 
-// Register new account
+// Endpoint to register new users
 app.post('/register', (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).send('Missing fields.');
+    return res.json({ success: false, message: 'Username and password required.' });
   }
 
-  const logins = JSON.parse(fs.readFileSync(loginsFilePath, 'utf8'));
+  let logins = JSON.parse(fs.readFileSync(LOGINS_FILE));
 
   if (logins[username]) {
-    return res.status(409).send('Username already exists.');
+    return res.json({ success: false, message: 'Username already exists.' });
   }
 
   logins[username] = password;
-  fs.writeFileSync(loginsFilePath, JSON.stringify(logins, null, 2));
+  fs.writeFileSync(LOGINS_FILE, JSON.stringify(logins, null, 2));
   
-  res.status(200).send('Registered successfully.');
+  res.json({ success: true, message: 'User registered successfully.' });
 });
 
-// Serve logins.json for frontend login checking
-app.get('/logins.json', (req, res) => {
-  res.sendFile(loginsFilePath);
-});
-
+// Start server
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`SolarHQ server running at http://localhost:${PORT}`);
 });
