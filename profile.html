@@ -38,14 +38,13 @@
     <h2>Your Profile</h2>
     <img id="profilePic" class="profile-picture" src="default-pfp.png" alt="Profile Picture">
     <br>
+    <input type="file" id="uploadPic" accept="image/*">
+    <br>
     <label for="username">Username:</label>
-    <input type="text" id="username">
+    <input type="text" id="username" placeholder="Enter your username">
 
     <label for="bio">Bio:</label>
-    <textarea id="bio"></textarea>
-
-    <label for="profilePicInput">Profile Picture URL:</label>
-    <input type="text" id="profilePicInput" placeholder="Enter image URL">
+    <textarea id="bio" placeholder="Write something about yourself..."></textarea>
 
     <button onclick="saveProfile()">Save Profile</button>
   </main>
@@ -64,20 +63,29 @@
       if (profilePic) document.getElementById('profilePic').src = profilePic;
     };
 
-    // Save profile info to localStorage
     function saveProfile() {
       const username = document.getElementById('username').value;
       const bio = document.getElementById('bio').value;
-      const profilePic = document.getElementById('profilePicInput').value;
+      const profilePic = document.getElementById('profilePic').src;
 
-      // Save the data to localStorage
       localStorage.setItem('username', username);
       localStorage.setItem('bio', bio);
-      localStorage.setItem('profilePic', profilePic || 'default-pfp.png'); // Use a default picture if none provided
+      localStorage.setItem('profilePic', profilePic);
 
-      // Show success message
-      alert('Profile saved successfully!');
+      alert('Profile saved!');
     }
+
+    // Handle profile picture upload
+    document.getElementById('uploadPic').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePic').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
   </script>
 
 </body>
