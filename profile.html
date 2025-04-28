@@ -14,6 +14,7 @@
     h2 { font-size: 36px; margin-bottom: 20px; }
     label { display: block; margin: 15px 0 5px; font-size: 18px; }
     input, textarea { padding: 10px; width: 300px; max-width: 90%; background: #1a1a1a; border: none; color: #fff; margin-bottom: 15px; border-radius: 5px; }
+    input:disabled, textarea:disabled { background: #333; }
     textarea { resize: none; height: 100px; }
     button { background-color: #8b5cf6; border: none; color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
     button:hover { background-color: #7a4ce0; }
@@ -38,15 +39,13 @@
     <h2>Your Profile</h2>
     <img id="profilePic" class="profile-picture" src="default-pfp.png" alt="Profile Picture">
     <br>
-    <input type="file" id="uploadPic" accept="image/*">
-    <br>
     <label for="username">Username:</label>
-    <input type="text" id="username" placeholder="Enter your username">
+    <input type="text" id="username" disabled>
 
     <label for="bio">Bio:</label>
-    <textarea id="bio" placeholder="Write something about yourself..."></textarea>
+    <textarea id="bio" disabled></textarea>
 
-    <button onclick="saveProfile()">Save Profile</button>
+    <button class="hidden">Save Profile</button>
   </main>
 
   <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
@@ -62,30 +61,6 @@
       if (bio) document.getElementById('bio').value = bio;
       if (profilePic) document.getElementById('profilePic').src = profilePic;
     };
-
-    function saveProfile() {
-      const username = document.getElementById('username').value;
-      const bio = document.getElementById('bio').value;
-      const profilePic = document.getElementById('profilePic').src;
-
-      localStorage.setItem('username', username);
-      localStorage.setItem('bio', bio);
-      localStorage.setItem('profilePic', profilePic);
-
-      alert('Profile saved!');
-    }
-
-    // Handle profile picture upload
-    document.getElementById('uploadPic').addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          document.getElementById('profilePic').src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
   </script>
 
 </body>
