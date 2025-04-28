@@ -5,20 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SolarHQ - Features</title>
   <style>
-    body { margin: 0; background: #0d0d0d; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
-    header { background: #111; padding: 20px; text-align: center; font-size: 28px; font-weight: bold; color: #8b5cf6; }
-    nav { display: flex; justify-content: center; background: #1a1a1a; padding: 10px 0; }
-    nav a { color: #ccc; text-decoration: none; margin: 0 15px; font-size: 18px; transition: color 0.3s; }
-    nav a:hover { color: #8b5cf6; }
-    main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 10px 0; font-size: 20px; color: #aaa; }
-    footer { background: #111; text-align: center; padding: 15px; font-size: 14px; color: #666; }
-    .fade-in { animation: fadeIn 2s ease-in; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    body {
+      margin: 0;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      background: #111;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #8b5cf6;
+      animation: slideDown 1s ease-out;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #1a1a1a;
+      padding: 10px 0;
+    }
+    nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 18px;
+      transition: color 0.3s, transform 0.3s;
+    }
+    nav a:hover {
+      color: #8b5cf6;
+      transform: scale(1.1);
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 30px;
+      color: #8b5cf6;
+      animation: pulse 2s infinite alternate;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+    }
+    .feature-card {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 30px 20px;
+      transition: transform 0.3s, background 0.3s;
+      cursor: pointer;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      background: #222;
+    }
+    .feature-card li {
+      list-style: none;
+      font-size: 20px;
+      color: #ccc;
+    }
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      color: #666;
+    }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0% { text-shadow: 0 0 5px #8b5cf6; }
+      100% { text-shadow: 0 0 20px #8b5cf6; }
+    }
   </style>
 </head>
-<body class="fade-in">
+<body>
 
   <header>SolarHQ</header>
 
@@ -31,13 +117,13 @@
 
   <main>
     <h1>SolarHQ Features</h1>
-    <ul>
-      <li>✔️ Auto Moderation</li>
-      <li>✔️ Custom Commands</li>
-      <li>✔️ 24/7 Uptime</li>
-      <li>✔️ Slash Commands Support</li>
-      <li>✔️ Easy Setup</li>
-    </ul>
+    <div class="features-grid">
+      <div class="feature-card"><li>✔️ Auto Moderation</li></div>
+      <div class="feature-card"><li>✔️ Custom Commands</li></div>
+      <div class="feature-card"><li>✔️ 24/7 Uptime</li></div>
+      <div class="feature-card"><li>✔️ Slash Commands Support</li></div>
+      <div class="feature-card"><li>✔️ Easy Setup</li></div>
+    </div>
   </main>
 
   <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
