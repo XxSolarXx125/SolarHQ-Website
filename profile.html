@@ -11,9 +11,14 @@
     nav a { color: #ccc; text-decoration: none; margin: 0 15px; font-size: 18px; transition: color 0.3s; }
     nav a:hover { color: #8b5cf6; }
     main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; }
-    h2 { font-size: 36px; margin-bottom: 10px; }
-    p { font-size: 20px; color: #999; }
+    h2 { font-size: 36px; margin-bottom: 20px; }
+    label { display: block; margin: 15px 0 5px; font-size: 18px; }
+    input, textarea { padding: 10px; width: 300px; max-width: 90%; background: #1a1a1a; border: none; color: #fff; margin-bottom: 15px; border-radius: 5px; }
+    textarea { resize: none; height: 100px; }
+    button { background-color: #8b5cf6; border: none; color: white; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
+    button:hover { background-color: #7a4ce0; }
     footer { background: #111; text-align: center; padding: 15px; font-size: 14px; color: #666; }
+    .profile-picture { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; background-color: #222; }
     .fade-in { animation: fadeIn 2s ease-in; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
@@ -31,11 +36,57 @@
 
   <main>
     <h2>Your Profile</h2>
-    <p>Username: SolarUser123</p>
-    <p>Account Created: Jan 1, 2025</p>
+    <img id="profilePic" class="profile-picture" src="default-pfp.png" alt="Profile Picture">
+    <br>
+    <input type="file" id="uploadPic" accept="image/*">
+    <br>
+    <label for="username">Username:</label>
+    <input type="text" id="username" placeholder="Enter your username">
+
+    <label for="bio">Bio:</label>
+    <textarea id="bio" placeholder="Write something about yourself..."></textarea>
+
+    <button onclick="saveProfile()">Save Profile</button>
   </main>
 
   <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
+
+  <script>
+    // Load profile info from localStorage
+    window.onload = function() {
+      const username = localStorage.getItem('username');
+      const bio = localStorage.getItem('bio');
+      const profilePic = localStorage.getItem('profilePic');
+
+      if (username) document.getElementById('username').value = username;
+      if (bio) document.getElementById('bio').value = bio;
+      if (profilePic) document.getElementById('profilePic').src = profilePic;
+    };
+
+    function saveProfile() {
+      const username = document.getElementById('username').value;
+      const bio = document.getElementById('bio').value;
+      const profilePic = document.getElementById('profilePic').src;
+
+      localStorage.setItem('username', username);
+      localStorage.setItem('bio', bio);
+      localStorage.setItem('profilePic', profilePic);
+
+      alert('Profile saved!');
+    }
+
+    // Handle profile picture upload
+    document.getElementById('uploadPic').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profilePic').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 
 </body>
 </html>
