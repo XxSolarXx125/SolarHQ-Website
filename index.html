@@ -16,6 +16,11 @@
     footer { background: #111; text-align: center; padding: 15px; font-size: 14px; color: #666; }
     .fade-in { animation: fadeIn 2s ease-in; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    input, button { margin: 10px 0; padding: 10px; border: none; border-radius: 5px; font-size: 16px; }
+    input { width: 250px; }
+    button { background: #8b5cf6; color: white; cursor: pointer; transition: background 0.3s; }
+    button:hover { background: #7c3aed; }
+    .auth-section { margin-top: 30px; }
   </style>
 </head>
 <body class="fade-in">
@@ -32,9 +37,29 @@
   <main>
     <h1>Welcome to SolarHQ</h1>
     <p>The official website for the SolarHQ Discord bot. Enjoy faster, smarter, and better features with our new update.</p>
+
+    <div class="auth-section" id="auth-section">
+      <h2>Login</h2>
+      <input type="text" id="login-username" placeholder="Username">
+      <input type="password" id="login-password" placeholder="Password">
+      <br>
+      <button onclick="login()">Login</button>
+
+      <h2 style="margin-top:30px;">or Sign Up</h2>
+      <input type="text" id="signup-username" placeholder="New Username">
+      <input type="password" id="signup-password" placeholder="New Password">
+      <br>
+      <button onclick="signup()">Sign Up</button>
+    </div>
+
+    <div id="welcome-section" style="display:none; margin-top: 30px;">
+      <h2 id="welcome-msg"></h2>
+      <button onclick="logout()">Logout</button>
+    </div>
   </main>
 
   <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
 
+  <script src="login.js"></script>
 </body>
 </html>
