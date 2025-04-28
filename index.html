@@ -1,107 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolarHQ</title>
-    <style>
-        body {
-            margin: 0;
-            background-color: #0d0d0d;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        header {
-            background-color: #111111;
-            padding: 20px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-            color: #8b5cf6;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #1a1a1a;
-            padding: 10px 0;
-        }
-
-        nav a {
-            color: #cccccc;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #8b5cf6;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 20px;
-            color: #999999;
-            max-width: 600px;
-        }
-
-        footer {
-            background-color: #111111;
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
-            color: #666666;
-        }
-
-        /* Simple fade-in animation */
-        .fade-in {
-            animation: fadeIn 2s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolarHQ - Home</title>
+  <style>
+    body { margin: 0; background: #0d0d0d; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; min-height: 100vh; }
+    header { background: #111; padding: 20px; text-align: center; font-size: 28px; font-weight: bold; color: #8b5cf6; }
+    nav { display: flex; justify-content: center; background: #1a1a1a; padding: 10px 0; }
+    nav a { color: #ccc; text-decoration: none; margin: 0 15px; font-size: 18px; transition: color 0.3s; }
+    nav a:hover { color: #8b5cf6; }
+    main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; }
+    h1 { font-size: 48px; margin-bottom: 20px; }
+    p { font-size: 20px; color: #999; max-width: 600px; }
+    footer { background: #111; text-align: center; padding: 15px; font-size: 14px; color: #666; }
+    .fade-in { animation: fadeIn 2s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
 </head>
 <body class="fade-in">
 
-    <header>SolarHQ</header>
+  <header>SolarHQ</header>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Features</a>
-        <a href="#">Login</a>
-        <a href="#">Profile</a>
-    </nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="features.html">Features</a>
+    <a href="login.html">Login</a>
+    <a href="profile.html">Profile</a>
+  </nav>
 
-    <main>
-        <h1>Welcome to SolarHQ</h1>
-        <p>The official website for the SolarHQ Discord bot. Enjoy faster, smarter, and better features with our new update.</p>
-    </main>
+  <main>
+    <h1>Welcome to SolarHQ</h1>
+    <p>The official website for the SolarHQ Discord bot. Enjoy faster, smarter, and better features with our new update.</p>
+  </main>
 
-    <footer>
-        &copy; 2025 SolarHQ. All rights reserved.
-    </footer>
+  <footer>&copy; 2025 SolarHQ. All rights reserved.</footer>
 
 </body>
 </html>
